@@ -17,7 +17,6 @@ let winHeight = layers[0].clientHeight;
 
 function updateResize() {
     winHeight = layers[0].clientHeight;
-    console.log('working');
 }
 
 function scroller() {
