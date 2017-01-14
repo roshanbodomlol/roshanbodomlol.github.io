@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Vanilla Layers</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/layers.css">
+        <link rel="stylesheet" href="css/theme.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="header">
+            <ul class="menu">
+                <li><a class="menu-scroller" href="#static">static</a></li>
+                <li><a class="menu-scroller" href="#home">home</a></li>
+                <li><a class="menu-scroller" href="#about">about</a> </li>
+                <li><a class="menu-scroller" href="#contact">contact</a> </li>
+                <li><a class="menu-scroller" href="#download">download</a> </li>
+            </ul>
+        </div>
+
+        <!--<h1>This is a big test.</h1>-->
+
+        <div id="static">
+            <div>a static positioned element.</div>
+        </div>
+
+        <div id="layers">
+            <div id="home" class="layer layer1"></div>
+            <div id="about" class="layer layer2"></div>
+            <div id="contact" class="layer layer3"></div>
+            <div id="download" class="layer layer4"></div>
+        </div>
+
+        <script src="js/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/smoothscroll.js"></script>
+        <script src="js/layers.js"></script>
+
+        <script>
+            //Initiate Layers
+            //Default Options
+            layersStart({
+                container: '#layers',
+                layer: '.layer',
+                parallax: true,
+                parallaxSpeed: 0.5,
+                overlayLayer: true
+            });
+//            layersStart();
+            //Menu Scroller
+            function pageScroll(e) {
+                e.preventDefault();
+                window.scroll({
+                    top: this.dataset.scrollto,
+                    left: 0,
+                    behavior: 'smooth'
+                });            }
+            const menuScrollers = document.querySelectorAll('.menu-scroller');
+            menuScrollers.forEach(menuScroller => {
+
+                let menuTarget = menuScroller.getAttribute('href');
+                let target = document.querySelector(menuTarget);
+                menuScroller.dataset.scrollto = target.dataset.offset;
+
+                menuScroller.addEventListener('click', pageScroll);
+
+            });
+
+
+        </script>
+
+    </body>
+</html>
