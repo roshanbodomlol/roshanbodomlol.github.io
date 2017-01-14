@@ -13,7 +13,12 @@ const majorOffset = layersWrap.offsetTop; // Account for offset of layers contai
 
 //Layers
 const layers = document.querySelectorAll(options.layer);
-const winHeight = layers[0].clientHeight;
+let winHeight = layers[0].clientHeight;
+
+function updateResize() {
+    winHeight = layers[0].clientHeight;
+    console.log('working');
+}
 
 function scroller() {
 
@@ -53,7 +58,7 @@ function scroller() {
 
 function init() {
 
-    layers.forEach((layer, index) => {
+    layers.forEach(layer => {
         let offsetTop = layer.offsetTop;
         let spacer = document.createElement('div');
         let overlay = document.createElement('div');
@@ -79,6 +84,8 @@ function init() {
 }
 
 window.addEventListener('scroll', scroller);
+window.onresize = updateResize();
+
 function layersStart(settings) {
 
     if(settings) {
