@@ -9,14 +9,21 @@ let options = {
 };
 
 const layersWrap = document.querySelector(options.container);
-const majorOffset = layersWrap.offsetTop; // Account for offset of layers container
+let majorOffset = layersWrap.offsetTop; // Account for offset of layers container
 
 //Layers
 const layers = document.querySelectorAll(options.layer);
 let winHeight = layers[0].clientHeight;
 
 function updateResize() {
+
     winHeight = layers[0].clientHeight;
+    majorOffset = layersWrap.offsetTop; // Account for offset of layers container
+    layers.forEach(layer => {
+        let offsetTop = layer.offsetTop;
+        layer.dataset.offset = offsetTop + majorOffset;
+    });
+
 }
 
 function scroller() {
@@ -83,7 +90,7 @@ function init() {
 }
 
 window.addEventListener('scroll', scroller);
-window.onresize = updateResize();
+window.onresize = updateResize;
 
 function layersStart(settings) {
 
