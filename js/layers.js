@@ -13,15 +13,17 @@ let majorOffset = layersWrap.offsetTop; // Account for offset of layers containe
 
 //Layers
 const layers = document.querySelectorAll(options.layer);
-let winHeight = layers[0].clientHeight;
+let winHeight = $(window).height();
+
+console.log(winHeight);
 
 function updateResize() {
 
-    winHeight = layers[0].clientHeight;
-    majorOffset = layersWrap.offsetTop; // Account for offset of layers container
+    winHeight = $(window).height();
     layers.forEach(layer => {
         let offsetTop = layer.offsetTop;
-        layer.dataset.offset = offsetTop + majorOffset;
+        let layerIndex = layer.dataset.index;
+        layer.dataset.offset = winHeight * layerIndex;
     });
 
 }
@@ -66,10 +68,11 @@ function init() {
 
     layers.forEach(layer => {
         let offsetTop = layer.offsetTop;
+        let layerIndex = layer.dataset.index;
         let spacer = document.createElement('div');
         let overlay = document.createElement('div');
 
-        layer.dataset.offset = offsetTop + majorOffset;
+        layer.dataset.offset = winHeight * layerIndex;
 
         layersWrap
             .insertBefore(spacer, layer.nextSibling)
